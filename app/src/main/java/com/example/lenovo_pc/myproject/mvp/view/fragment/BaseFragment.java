@@ -22,8 +22,8 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         View view = inflater.inflate(setMyContentView(), container, false);
         initView(view);
         onClick(view);
-        initData();
         data_loading();
+        initData();
         return view;
     }
 

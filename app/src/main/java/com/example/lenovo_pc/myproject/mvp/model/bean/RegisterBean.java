@@ -3,47 +3,35 @@ package com.example.lenovo_pc.myproject.mvp.model.bean;
 /**
  * 作者：李飞宇
  * 时间：2017/7/17 21:09
- * 功能：注册的Bean
+ * 功能：注册的用户信息数据库的Bean
  */
 
 public class RegisterBean {
-    /**
-     * code : 400
-     * datas : {"error":"请填写用户名"}
-     */
+    private String member_name;
+    private String member_passwd;
+    private String member_email;
 
-    private int code;
-    private DatasBean datas;
-
-    public int getCode() {
-        return code;
+    public String getMember_name() {
+        return member_name;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setMember_name(String member_name) {
+        this.member_name = member_name;
     }
 
-    public DatasBean getDatas() {
-        return datas;
+    public String getMember_passwd() {
+        return member_passwd;
     }
 
-    public void setDatas(DatasBean datas) {
-        this.datas = datas;
+    public void setMember_passwd(String member_passwd) {
+        this.member_passwd = member_passwd;
     }
 
-    public static class DatasBean {
-        /**
-         * error : 请填写用户名
-         */
+    public String getMember_email() {
+        return member_email;
+    }
 
-        private String error;
-
-        public String getError() {
-            return error;
-        }
-
-        public void setError(String error) {
-            this.error = error;
-        }
+    public void setMember_email(String member_email) {
+        this.member_email = member_email;
     }
 }

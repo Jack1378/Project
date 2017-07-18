@@ -1,5 +1,8 @@
 package com.example.lenovo_pc.myproject.mvp.presenter;
 
+import android.util.Log;
+
+import com.example.lenovo_pc.myproject.mvp.model.bean.RegisterBean;
 import com.example.lenovo_pc.myproject.mvp.model.utils.HttpUtils;
 import com.example.lenovo_pc.myproject.mvp.model.utils.RequestDataCallBack;
 import com.example.lenovo_pc.myproject.mvp.view.iview.IMainView;
@@ -12,7 +15,6 @@ import com.example.lenovo_pc.myproject.mvp.view.iview.IMainView;
  */
 
 public class MainPresenter<T> extends BasePresenter<IMainView> {
-
     private HttpUtils httpUtils;
 
     public <T> void load_data(String url, Class<T> tClass) {
@@ -28,6 +30,22 @@ public class MainPresenter<T> extends BasePresenter<IMainView> {
                 getMvpView().ErrCallBack(err, code);
             }
         }, tClass);
+
+    }
+
+    public <T> void load_post(String url, Class<T> tClass, String user, String password,String email) {
+        httpUtils = new HttpUtils();
+        httpUtils.postAsynHttp(url, new RequestDataCallBack<T>() {
+            @Override
+            public void SucceedBack(Object o) {
+                getMvpView().SucceedCallBack(o);
+            }
+
+            @Override
+            public void ErrBack(String err, int code) {
+                getMvpView().ErrCallBack(err, code);
+            }
+        }, tClass,user,password,email);
 
     }
 }

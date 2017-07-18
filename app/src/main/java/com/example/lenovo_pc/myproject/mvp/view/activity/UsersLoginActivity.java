@@ -72,6 +72,7 @@ public class UsersLoginActivity extends BaseActivity implements View.OnClickList
             case R.id.UserRegister:
                 //登录
                 submit();
+
                 break;
             case R.id.UserRegisterAccount:
                 //注册 跳转到注册页面
@@ -97,8 +98,6 @@ public class UsersLoginActivity extends BaseActivity implements View.OnClickList
             Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-
         // TODO validate success, do something
-
     }
 }

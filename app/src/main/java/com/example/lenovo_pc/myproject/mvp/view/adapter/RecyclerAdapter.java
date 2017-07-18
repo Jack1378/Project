@@ -22,10 +22,11 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter {
     private Context context;
-    private List<NewsData.DataBean> News_List = new ArrayList<>();
+    private List<NewsData.DataBean> News_List;
 
     public RecyclerAdapter(Context mContext) {
         this.context = mContext;
+        News_List = new ArrayList<>();
     }
 
     @Override
@@ -50,9 +51,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
         return News_List.size();
     }
     public void setData(List<NewsData.DataBean> data) {
-        if (data!=null && data.size() > 0) {
+        if (data!=null) {
             News_List.addAll(data);
-        }
+            notifyDataSetChanged();
+    }
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;

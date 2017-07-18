@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <!--首页-->
-    <include layout="@layout/headline"/>
+    <include layout="@layout/headline" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
