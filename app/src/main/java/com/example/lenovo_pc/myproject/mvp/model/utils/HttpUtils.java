@@ -1,13 +1,17 @@
 package com.example.lenovo_pc.myproject.mvp.model.utils;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.lenovo_pc.myproject.mvp.model.bean.LoginBean;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -25,6 +29,8 @@ import okhttp3.Response;
  */
 
 public class HttpUtils {
+    private List<LoginBean> list = new ArrayList();
+    private static final String TAG = "HttpUtils";
     private RequestDataCallBack requestDataCallBack;
     private Handler handler = new Handler() {
         @Override
@@ -32,6 +38,9 @@ public class HttpUtils {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
+                    requestDataCallBack.SucceedBack(msg.obj);
+                    break;
+                case 1:
                     requestDataCallBack.SucceedBack(msg.obj);
                     break;
             }
@@ -60,7 +69,7 @@ public class HttpUtils {
             @Override
             public void onFailure(Call call, IOException e) {
                 //netDataCallback.err(500,e.getMessage());
-                Log.i("=====", "onFailure: " + e.getMessage());
+                Log.e("=====", "onFailure: " + e.getMessage());
             }
 
             @Override
@@ -76,7 +85,15 @@ public class HttpUtils {
     }
 
     /**
-     * 异步请求
+     * 异步post请求注册
+     *
+     * @param url
+     * @param requestDataCallBack
+     * @param tClass
+     * @param user
+     * @param password
+     * @param email
+     * @param <T>
      */
     public <T> void postAsynHttp(String url, final RequestDataCallBack requestDataCallBack, final Class<T> tClass, String user, String password, String email) {
         OkHttpClient mOkHttpClient = new OkHttpClient();
@@ -122,6 +139,61 @@ public class HttpUtils {
                     e.printStackTrace();
                 }
             }
+        });
+    }
+
+    /**
+     * 异步post请求登录
+     *
+     * @param <T>
+     * @param url
+     * @param requestDataCallBack
+     * @param tClass
+     * @param userNameString
+     * @param userPasswordString
+     */
+    public <T> void postAsynHttpLogin(String url, final RequestDataCallBack requestDataCallBack, final Class<T> tClass, String userNameString, String userPasswordString) {
+
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+        mOkHttpClient = new OkHttpClient();
+        RequestBody formBody = new FormBody.Builder()
+                .add("act", "login")
+                .add("username", userNameString)
+                .add("password", userPasswordString)
+                .add("client", "android")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(formBody)
+                .build();
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                try {
+                    final String str = response.body().string();
+                    Log.e(TAG, "onResponse: " + str);
+                    Message message = handler.obtainMessage();
+                    message.what = 1;
+                    /*runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {*/
+                    Gson asylgson = new Gson();
+                    T t = asylgson.fromJson(str, tClass);
+                    Log.e(TAG, "run: " + t.toString());
+                    requestDataCallBack.SucceedBack(t);
+                     /*   }
+                    });*/
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
         });
     }
 

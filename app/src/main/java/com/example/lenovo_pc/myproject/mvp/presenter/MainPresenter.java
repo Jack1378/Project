@@ -16,6 +16,7 @@ import com.example.lenovo_pc.myproject.mvp.view.iview.IMainView;
 
 public class MainPresenter<T> extends BasePresenter<IMainView> {
     private HttpUtils httpUtils;
+    private static final String TAG = "MainPresenter";
 
     public <T> void load_data(String url, Class<T> tClass) {
         httpUtils = new HttpUtils();
@@ -33,7 +34,7 @@ public class MainPresenter<T> extends BasePresenter<IMainView> {
 
     }
 
-    public <T> void load_post(String url, Class<T> tClass, String user, String password,String email) {
+    public <T> void load_post(String url, Class<T> tClass, String user, String password, String email) {
         httpUtils = new HttpUtils();
         httpUtils.postAsynHttp(url, new RequestDataCallBack<T>() {
             @Override
@@ -45,7 +46,27 @@ public class MainPresenter<T> extends BasePresenter<IMainView> {
             public void ErrBack(String err, int code) {
                 getMvpView().ErrCallBack(err, code);
             }
-        }, tClass,user,password,email);
+        }, tClass, user, password, email);
 
     }
+
+
+    public <T> void load_post_Login(String url, Class<T> tClass, String userNameString, String userPasswordString) {
+        httpUtils = new HttpUtils();
+        httpUtils.postAsynHttpLogin(url, new RequestDataCallBack<T>() {
+            @Override
+            public void SucceedBack(Object o) {
+                Log.e(TAG, "SucceedBack: "+o );
+                getMvpView().SucceedCallBack(o);
+            }
+
+            @Override
+            public void ErrBack(String err, int code) {
+                getMvpView().ErrCallBack(err, code);
+            }
+        }, tClass,userNameString,userPasswordString);
+
+    }
+
+
 }
