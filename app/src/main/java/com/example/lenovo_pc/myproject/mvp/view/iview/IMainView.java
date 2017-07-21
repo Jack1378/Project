@@ -8,7 +8,7 @@ package com.example.lenovo_pc.myproject.mvp.view.iview;
 
 public interface IMainView<T> {
     //成功
-    void SucceedCallBack(T t);
+    void SucceedCallBack(T t,int i);
 
     //失败
     void ErrCallBack(String str, int code);

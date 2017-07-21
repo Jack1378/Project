@@ -12,7 +12,7 @@ import com.example.lenovo_pc.myproject.mvp.view.iview.IMainView;
 /**
  * 作者：李飞宇
  * 时间：2017/7/12 15:01
- * 功能：
+ * 功能：总的fragment
  */
 
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
@@ -22,14 +22,14 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         View view = inflater.inflate(setMyContentView(), container, false);
         initView(view);
         onClick(view);
-        data_loading();
-        initData();
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initData();
+        data_loading();
     }
 
     //找布局
@@ -44,6 +44,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     public void onClick(View view) {
 
     }
+
     abstract void data_loading();
 
 }

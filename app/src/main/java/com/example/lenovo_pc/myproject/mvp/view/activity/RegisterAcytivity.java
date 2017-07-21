@@ -146,7 +146,7 @@ public class RegisterAcytivity extends BaseActivity implements View.OnClickListe
     }
 
     @Override
-    public void SucceedCallBack(RegisterBean registerBean) {
+    public void SucceedCallBack(RegisterBean registerBean,int i) {
 
     }
 

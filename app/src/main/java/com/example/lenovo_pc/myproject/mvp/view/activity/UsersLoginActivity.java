@@ -40,7 +40,7 @@ public class UsersLoginActivity extends BaseActivity implements View.OnClickList
     private String userNameString;
     private String userPasswordString;
     private LoginBean loginBean1;
-    private int code;
+    private int code1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -120,16 +120,16 @@ public class UsersLoginActivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
-    public void SucceedCallBack(LoginBean loginBean) {
+    public void SucceedCallBack(LoginBean loginBean,int i) {
         loginBean1 = loginBean;
-        Log.e(TAG, "SucceedCallBack: "+code );
+        Log.e(TAG, "SucceedCallBack: " + code1);
         Log.e(TAG, "SucceedCallBack: " + loginBean.toString());
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (loginBean1!=null){
-                    code = loginBean1.getCode();
-                    if (code==200) {
+                if (loginBean1 != null) {
+                    code1 = loginBean1.getCode();
+                    if (code1 == 200) {
                         Toast.makeText(UsersLoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
                         //登录成功后跳转到主页面
                         Intent intent = new Intent(UsersLoginActivity.this, MainActivity.class);

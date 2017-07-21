@@ -38,6 +38,7 @@ public class HttpUtils {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
+                    Log.e(TAG, "handleMessage: "+msg.obj.toString() );
                     requestDataCallBack.SucceedBack(msg.obj);
                     break;
                 case 1:
@@ -78,6 +79,7 @@ public class HttpUtils {
                 message.what = 0;
                 Gson gson = new Gson();
                 T t = gson.fromJson(response.body().string(), tClass);
+                Log.e(TAG, "onResponse: " + t);
                 message.obj = t;
                 handler.sendMessage(message);
             }

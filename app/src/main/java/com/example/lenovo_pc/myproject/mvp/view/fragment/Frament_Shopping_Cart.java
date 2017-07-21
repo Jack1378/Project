@@ -12,7 +12,7 @@ import com.example.lenovo_pc.myproject.R;
 /**
  * 作者：李飞宇
  * 时间：2017/7/12 14:13
- * 功能：
+ * 功能：购物车界面
  */
 
 public class Frament_Shopping_Cart extends BaseFragment {

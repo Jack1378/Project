@@ -2,8 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#729138"
     android:orientation="vertical">
     <!--分类页面-->
-    <include layout="@layout/headline"/>
+    <include layout="@layout/headline" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/First_Classify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/Second_Classify"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/First_Classify"
+            android:layout_toRightOf="@+id/First_Classify"
+            android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+
 </LinearLayout>

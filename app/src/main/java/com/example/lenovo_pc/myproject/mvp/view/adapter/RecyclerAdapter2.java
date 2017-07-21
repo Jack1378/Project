@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.lenovo_pc.myproject.R;
+import com.example.lenovo_pc.myproject.mvp.model.bean.ClassifyBean;
 import com.example.lenovo_pc.myproject.mvp.model.bean.NewsData;
 
 import java.util.ArrayList;
@@ -17,31 +18,30 @@ import java.util.List;
 /**
  * 作者：李飞宇
  * 时间：2017/7/11 20:46
- * 功能：RecyclerView的适配器（首页）
+ * 功能：RecyclerView的适配器
  */
 
-public class RecyclerAdapter extends RecyclerView.Adapter {
+public class RecyclerAdapter2 extends RecyclerView.Adapter {
     private Context context;
-    private List<NewsData.DataBean> News_List;
+    private List<ClassifyBean.DatasBean.ClassListBean> News_List = new ArrayList<>();
 
-    public RecyclerAdapter(Context mContext) {
+    public RecyclerAdapter2(Context mContext) {
         this.context = mContext;
-        News_List = new ArrayList<>();
+
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.image_text, null);
-
+        View view = View.inflate(context, R.layout.image_texts, null);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
-        viewHolder.textView.setText(News_List.get(position).getNews_title());
+        viewHolder.textView.setText(News_List.get(position).getGc_name());
         Glide.with(context)
-                .load(News_List.get(position).getPic_url())
+                .load(News_List.get(position).getImage())
                 .into(((ViewHolder) holder).imageView);
 
     }
@@ -51,7 +51,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
         return News_List.size();
     }
 
-    public void setData(List<NewsData.DataBean> data) {
+    public void setData(List<ClassifyBean.DatasBean.ClassListBean> data) {
         if (data != null) {
             News_List.addAll(data);
             notifyDataSetChanged();
@@ -64,8 +64,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.Image_View);
-            textView = (TextView) itemView.findViewById(R.id.Text_View);
+            imageView = (ImageView) itemView.findViewById(R.id.Image_View2);
+            textView = (TextView) itemView.findViewById(R.id.Text_View2);
         }
     }
 
