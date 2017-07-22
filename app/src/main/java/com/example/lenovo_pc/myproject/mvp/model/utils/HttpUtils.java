@@ -1,10 +1,7 @@
 package com.example.lenovo_pc.myproject.mvp.model.utils;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.example.lenovo_pc.myproject.mvp.model.bean.LoginBean;
 import com.google.gson.Gson;
@@ -38,7 +35,7 @@ public class HttpUtils {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
-                    Log.e(TAG, "handleMessage: "+msg.obj.toString() );
+
                     requestDataCallBack.SucceedBack(msg.obj);
                     break;
                 case 1:
@@ -70,7 +67,7 @@ public class HttpUtils {
             @Override
             public void onFailure(Call call, IOException e) {
                 //netDataCallback.err(500,e.getMessage());
-                Log.e("=====", "onFailure: " + e.getMessage());
+//                Log.e("=====", "onFailure: " + e.getMessage());
             }
 
             @Override
@@ -79,7 +76,7 @@ public class HttpUtils {
                 message.what = 0;
                 Gson gson = new Gson();
                 T t = gson.fromJson(response.body().string(), tClass);
-                Log.e(TAG, "onResponse: " + t);
+//                Log.e(TAG, "onResponse: " + t);
                 message.obj = t;
                 handler.sendMessage(message);
             }
@@ -125,7 +122,7 @@ public class HttpUtils {
             public void onResponse(Call call, final Response response) throws IOException {
                 try {
                     final String str = response.body().string();
-                    Log.i("wangshu", str);
+//                    Log.i("wangshu", str);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -179,7 +176,7 @@ public class HttpUtils {
             public void onResponse(Call call, final Response response) throws IOException {
                 try {
                     final String str = response.body().string();
-                    Log.e(TAG, "onResponse: " + str);
+//                    Log.e(TAG, "onResponse: " + str);
                     Message message = handler.obtainMessage();
                     message.what = 1;
                     /*runOnUiThread(new Runnable() {
@@ -187,7 +184,7 @@ public class HttpUtils {
                         public void run() {*/
                     Gson asylgson = new Gson();
                     T t = asylgson.fromJson(str, tClass);
-                    Log.e(TAG, "run: " + t.toString());
+//                    Log.e(TAG, "run: " + t.toString());
                     requestDataCallBack.SucceedBack(t);
                      /*   }
                     });*/

@@ -16,6 +16,7 @@ import com.example.lenovo_pc.myproject.R;
 import com.example.lenovo_pc.myproject.mvp.model.bean.LoginBean;
 import com.example.lenovo_pc.myproject.mvp.model.bean.NewsData;
 import com.example.lenovo_pc.myproject.mvp.presenter.MainPresenter;
+import com.example.lenovo_pc.myproject.mvp.presenter.UsersLoginPresenter;
 import com.example.lenovo_pc.myproject.mvp.view.iview.IMainView;
 
 import java.util.List;
@@ -87,10 +88,9 @@ public class UsersLoginActivity extends BaseActivity implements View.OnClickList
             case R.id.UserRegister:
                 //登录
                 submit();
-                MainPresenter presenter = new MainPresenter();
+                UsersLoginPresenter presenter = new UsersLoginPresenter();
                 presenter.attachView(this);
                 presenter.load_post_Login(url, LoginBean.class, userNameString, userPasswordString);
-
                 break;
             case R.id.UserRegisterAccount:
                 //注册 跳转到注册页面
@@ -120,7 +120,7 @@ public class UsersLoginActivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
-    public void SucceedCallBack(LoginBean loginBean,int i) {
+    public void SucceedCallBack(LoginBean loginBean, int i) {
         loginBean1 = loginBean;
         Log.e(TAG, "SucceedCallBack: " + code1);
         Log.e(TAG, "SucceedCallBack: " + loginBean.toString());
@@ -145,6 +145,11 @@ public class UsersLoginActivity extends BaseActivity implements View.OnClickList
 //        loginBean1 = loginBean;
 //        List<LoginBean.DatasBean> data = loginBean.getDatas()
 //        radapter.setData(data);
+    }
+
+    @Override
+    public void SucceedCallBack1(LoginBean loginBean, int i) {
+
     }
 
     @Override

@@ -14,6 +14,7 @@ import com.example.lenovo_pc.myproject.R;
 import com.example.lenovo_pc.myproject.mvp.model.bean.RegisterBean;
 import com.example.lenovo_pc.myproject.mvp.model.utils.HttpUtils;
 import com.example.lenovo_pc.myproject.mvp.presenter.MainPresenter;
+import com.example.lenovo_pc.myproject.mvp.presenter.RegisterPersebter;
 import com.example.lenovo_pc.myproject.mvp.view.iview.IMainView;
 
 /**
@@ -31,11 +32,11 @@ public class RegisterAcytivity extends BaseActivity implements View.OnClickListe
     private EditText Edit_Password_Twice;
     private EditText User_Email;
     private Button User_Register;
-    private MainPresenter presenter;
     private String user;
     private String password;
     private String twice;
     private String email;
+    private RegisterPersebter presenter1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,9 +93,9 @@ public class RegisterAcytivity extends BaseActivity implements View.OnClickListe
             case R.id.User_Register:
                 submit();
                 //V-P-M
-                presenter = new MainPresenter();
-                presenter.attachView(this);
-                presenter.load_post(url, RegisterBean.class, user, password, email);
+                presenter1 = new RegisterPersebter();
+                presenter1.attachView(this);
+                presenter1.load_post(url, RegisterBean.class, user, password, email);
                 Toast.makeText(RegisterAcytivity.this, "注册成功", Toast.LENGTH_SHORT).show();
                 break;
 
@@ -147,6 +148,11 @@ public class RegisterAcytivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void SucceedCallBack(RegisterBean registerBean,int i) {
+
+    }
+
+    @Override
+    public void SucceedCallBack1(RegisterBean registerBean, int i) {
 
     }
 

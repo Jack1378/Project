@@ -6,7 +6,7 @@
     <!--分类页面-->
     <include layout="@layout/headline" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -15,17 +15,19 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/First_Classify"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/Second_Classify"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/First_Classify"
-            android:layout_toRightOf="@+id/First_Classify"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/Third_Classify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"></android.support.v7.widget.RecyclerView>
-    </RelativeLayout>
+    </LinearLayout>
+
 
 </LinearLayout>

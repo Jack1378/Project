@@ -39,10 +39,6 @@ public class RecyclerThridAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.textView.setText(News_List.get(position).getGc_name());
-        Glide.with(context)
-                .load(News_List.get(position).getImage())
-                .into(((ViewHolder) holder).imageView);
-
     }
 
     @Override
@@ -67,6 +63,5 @@ public class RecyclerThridAdapter extends RecyclerView.Adapter {
             textView = (TextView) itemView.findViewById(R.id.Text_View2);
         }
     }
-
 
 }

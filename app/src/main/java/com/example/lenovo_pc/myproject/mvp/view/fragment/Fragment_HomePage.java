@@ -80,13 +80,18 @@ public class Fragment_HomePage extends BaseFragment implements IMainView<NewsDat
     public void data_loading() {
         mainPresenter = new MainPresenter();
         mainPresenter.attachView(this);
-        mainPresenter.load_data(url, NewsData.class,0);
+        mainPresenter.load_data(url, NewsData.class,4);
     }
 
     @Override
     public void SucceedCallBack(NewsData newsData,int i) {
         List<NewsData.DataBean> data = newsData.getData();
         radapter.setData(data);
+    }
+
+    @Override
+    public void SucceedCallBack1(NewsData newsData, int i) {
+
     }
 
     @Override

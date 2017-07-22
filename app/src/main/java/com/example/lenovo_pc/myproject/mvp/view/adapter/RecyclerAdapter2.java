@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,29 +22,43 @@ import java.util.List;
  * 功能：RecyclerView的适配器
  */
 
-public class RecyclerAdapter2 extends RecyclerView.Adapter {
+public class RecyclerAdapter2 extends RecyclerView.Adapter implements View.OnClickListener {
     private Context context;
     private List<ClassifyBean.DatasBean.ClassListBean> News_List = new ArrayList<>();
+    private ViewHolder viewHolder;
+    private OnItemClickListener mOnItemClickListener = null;
 
     public RecyclerAdapter2(Context mContext) {
         this.context = mContext;
-
     }
+
+    @Override
+    public void onClick(View view) {
+        //注意这里使用getTag方法获取position
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick(view, (int) view.getTag());
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(context, R.layout.image_texts, null);
-        return new ViewHolder(view);
-    }
+        ViewHolder vi = new ViewHolder(view);
+        view.setOnClickListener(this);
 
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ViewHolder viewHolder = (ViewHolder) holder;
-        viewHolder.textView.setText(News_List.get(position).getGc_name());
-        Glide.with(context)
-                .load(News_List.get(position).getImage())
-                .into(((ViewHolder) holder).imageView);
 
+
+
+        return vi/*new ViewHolder(view)*/;
     }
 
     @Override
@@ -52,10 +67,21 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter {
     }
 
     public void setData(List<ClassifyBean.DatasBean.ClassListBean> data) {
-        if (data != null) {
+        if (data != null && data.size() > 0) {
             News_List.addAll(data);
             notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        viewHolder = (ViewHolder) holder;
+        viewHolder.textView.setText(News_List.get(position).getGc_name());
+        Glide.with(context)
+                .load(News_List.get(position).getImage())
+                .into(((ViewHolder) holder).imageView);
+        //将position保存在itemView的Tag中，以便点击时进行获取
+        viewHolder.itemView.setTag(position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
